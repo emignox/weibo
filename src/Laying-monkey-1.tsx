@@ -65,10 +65,11 @@ export function Model(props: GroupProps) {
   return (
     <group {...props} dispose={null}>
       <pointLight
-        intensity={543.514}
+        intensity={100}
         decay={2}
-        position={[-6.273, 10.933, 0]}
+        position={[-2, -4, 10]}
         rotation={[-Math.PI / 2, 0, 0]}
+        color={"#fff"}
       />
 
       <group rotation={[0, Math.PI / 2, 0]}>
