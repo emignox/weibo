@@ -28,7 +28,7 @@ function Nav() {
           <ul className="flex flex-col items-start justify-center w-full h-2/4 gap-y-5 ">
             <li className={styleList}>Home</li>
             <li className={styleList}>About</li>
-            <li className={styleList}>Contact</li>
+            <li className={styleList}>Contacts</li>
             <li className={`group ${styleList}`}>
               Cart
               <PiShoppingCartFill className="inline mx-1 text-2xl duration-300 transform group-hover:translate-x-10" />{" "}
