@@ -18,7 +18,6 @@ function HomePage() {
       metalness: 1.5,
       roughness: 1,
       shadowSide: THREE.BackSide,
-      transparent: true,
     });
   }, [texture]);
 
