@@ -1,8 +1,7 @@
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { OrbitControls, Stage, Box } from "@react-three/drei";
 import { Suspense, useMemo } from "react";
 import { Model } from "./Laying-monkey-1";
-import { ImMenu } from "react-icons/im";
 import { TextureLoader, MeshPhysicalMaterial } from "three";
 import TextContent from "./textContent";
 import * as THREE from "three";
@@ -21,14 +20,23 @@ function HomePage() {
     });
   }, [texture]);
 
+  const CameraControls = () => {
+    const { camera, mouse } = useThree();
+
+    useFrame(() => {
+      camera.position.x += (mouse.x * 10 - camera.position.x) * 0.03;
+      camera.position.y += (-mouse.y * 10 - camera.position.y) * 0.03;
+      camera.lookAt(0, 0, 0);
+    });
+
+    return null;
+  };
+
   return (
     <>
-      <div className="flex items-center justify-between w-full px-3 text-3xl font-black ">
-        <p>weibo...</p>
-        <ImMenu className="text-3xl font-black" />
-      </div>
-      <div className="w-full h-screen overflow-hidden bg-gray-200 rounded-full">
+      <div className="w-full h-[95vh] overflow-hidden bg-gray-200 rounded-full">
         <Canvas className="w-full h-full">
+          <CameraControls />
           <Suspense fallback={null}>
             <TextContent />
 
@@ -36,6 +44,9 @@ function HomePage() {
 
             <OrbitControls
               enableZoom={false}
+              enablePan={false}
+              maxZoom={10}
+              minZoom={10}
               rotateSpeed={0.1}
               minAzimuthAngle={-Math.PI / 4} // -180 degrees
               maxAzimuthAngle={Math.PI / 4}
