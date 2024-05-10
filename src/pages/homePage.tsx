@@ -1,12 +1,14 @@
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { OrbitControls, Stage, Box } from "@react-three/drei";
 import { Suspense, useMemo } from "react";
-import { Model } from "./Laying-monkey-1";
+import { Model } from "../components/3D/Laying-monkey-1";
 import { TextureLoader, MeshPhysicalMaterial } from "three";
-import TextContent from "./textContent";
+import TextContent from "../components/3D/textContent";
 import * as THREE from "three";
+import Brand from "../components/content-homepage/brand";
+import React from "react";
 
-function HomePage() {
+const HomePage = React.memo(() => {
   const texture = useLoader(TextureLoader, "stone.jpg");
 
   const material = useMemo(() => {
@@ -20,7 +22,7 @@ function HomePage() {
     });
   }, [texture]);
 
-  const CameraControls = () => {
+  const CameraControls = React.memo(() => {
     const { camera, mouse } = useThree();
 
     useFrame(() => {
@@ -30,14 +32,23 @@ function HomePage() {
     });
 
     return null;
-  };
+  });
 
   return (
     <>
-      <div className="w-full h-[95vh] overflow-hidden bg-gray-200 rounded-full">
-        <Canvas className="w-full h-full">
-          <CameraControls />
-          <Suspense fallback={null}>
+      <Suspense
+        fallback={
+          <>
+            <div className="">
+              <p>caricamento...</p>
+            </div>
+          </>
+        }
+      >
+        <div className="w-full h-[95vh] overflow-hidden bg-gray-200 rounded-full">
+          <Canvas className="w-full h-full">
+            <CameraControls />
+
             <TextContent />
 
             <Box args={[3700, 3700, 2500]} material={material} />
@@ -56,11 +67,14 @@ function HomePage() {
             <Stage>
               <Model />
             </Stage>
-          </Suspense>
-        </Canvas>
+          </Canvas>
+        </div>
+      </Suspense>
+      <div>
+        <Brand />
       </div>
     </>
   );
-}
+});
 
 export default HomePage;

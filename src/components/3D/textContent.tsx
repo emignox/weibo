@@ -1,7 +1,8 @@
 import Text from "./text";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
-function Content() {
+const Content = React.memo(() => {
   const navigate = useNavigate();
   return (
     <>
@@ -48,6 +49,6 @@ function Content() {
       />
     </>
   );
-}
+});
 
 export default Content;

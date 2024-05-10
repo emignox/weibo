@@ -2,15 +2,19 @@ import { ImMenu } from "react-icons/im";
 import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { PiShoppingCartFill } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const styleList = "  list-item text-2xl w-full flex items-center  group ";
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="flex items-center justify-between w-full px-3 text-3xl font-black ">
-        <p>weibo...</p>
+      <div className="fixed z-50 flex items-center justify-between w-full px-3 text-3xl font-black ">
+        <p className="cursor-pointer" onClick={() => navigate("/")}>
+          weibo...
+        </p>
         <ImMenu
           className="text-3xl font-black"
           onMouseEnter={() => setIsMenuOpen(true)}

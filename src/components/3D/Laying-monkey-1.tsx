@@ -12,6 +12,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { useState } from "react";
 import { Vector3 } from "three";
+import React from "react";
+import { useCallback } from "react";
 
 const monkeyMaterial = new MeshStandardMaterial({
   color: "#FFD700",
@@ -19,7 +21,7 @@ const monkeyMaterial = new MeshStandardMaterial({
   roughness: 0.2,
 });
 
-export function Model(props: GroupProps) {
+export const Model = React.memo((props: GroupProps) => {
   const texture = useLoader(TextureLoader, "/texture-marmo.jpg");
   const ConoMesh = useRef<THREE.Mesh>(null);
   const [isConoHovered, setIsConoHovered] = useState(false);
@@ -37,7 +39,7 @@ export function Model(props: GroupProps) {
     metalness: 1.4,
   });
 
-  useFrame(() => {
+  const frameCallback = useCallback(() => {
     if (ConoMesh.current) {
       ConoMesh.current.rotation.y += isConoHovered ? 0.009 : 0.006;
       ConoMesh.current.position.lerp(
@@ -59,7 +61,9 @@ export function Model(props: GroupProps) {
     if (MonkeyMesh.current) {
       MonkeyMesh.current.rotation.y += 0.005;
     }
-  });
+  }, [isConoHovered, targetYPosition, conoScale, isTorusHovered, torusScale]);
+
+  useFrame(frameCallback);
 
   const { nodes, materials } = useGLTF("/laying-monkey-1.gltf");
   return (
@@ -137,6 +141,6 @@ export function Model(props: GroupProps) {
       </group>
     </group>
   );
-}
+});
 
 useGLTF.preload("/laying-monkey-1.gltf");

@@ -11,6 +11,7 @@ body {
 body::-webkit-scrollbar {
   display: none;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .list-item {
