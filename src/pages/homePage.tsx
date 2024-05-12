@@ -39,7 +39,7 @@ const HomePage = React.memo(() => {
       <Suspense
         fallback={
           <>
-            <div className="">
+            <div className="z-50 flex items-center justify-center h-screen text-3xl font-bold text-white bg-black ">
               <p>caricamento...</p>
             </div>
           </>
