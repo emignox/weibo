@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      textShadow: {
+        default: "0 2px 5px rgba(0, 0, 0, 0.5)",
+        lg: "0 2px 10px rgba(0, 0, 0, 0.5)",
+      },
       colors: {
         "weibo-blue": "#0084FF",
         "weibo-red": "#FF3E3E",
@@ -16,5 +20,6 @@ export default {
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [],
 };

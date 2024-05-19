@@ -7,6 +7,7 @@ import TextContent from "../components/3D/textContent";
 import * as THREE from "three";
 import Brand from "../components/content-homepage/brand";
 import React from "react";
+import Find from "../components/content-homepage/find-Product";
 
 const HomePage = React.memo(() => {
   const texture = useLoader(TextureLoader, "stone.jpg");
@@ -45,7 +46,7 @@ const HomePage = React.memo(() => {
           </>
         }
       >
-        <div className="w-full h-[95vh] overflow-hidden bg-gray-200 rounded-full">
+        <div className="w-full h-[95vh] overflow-hidden py-12 bg-gray-200 rounded-full">
           <Canvas className="w-full h-full">
             <CameraControls />
 
@@ -72,6 +73,9 @@ const HomePage = React.memo(() => {
       </Suspense>
       <div>
         <Brand />
+      </div>
+      <div>
+        <Find />
       </div>
     </>
   );

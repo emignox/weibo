@@ -2,16 +2,36 @@ import { data_Brand, Item } from "./data-brand"; // Aggiorna con il percorso cor
 import Button from "../blocs/buttons";
 import { useNavigate } from "react-router-dom";
 import { Scroll } from "../blocs/scroll";
+import { useEffect, useState } from "react";
 
 const FlexAlternatingComponent = ({ items }: { items: Item[] }) => {
   const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
+  const imagesStyle = "w-4/5 lg:w-2/6  ";
+
+  const images = [
+    <img className={`${imagesStyle}`} src="/torus2.png" alt="" />,
+    <img className={`${imagesStyle}`} src="/drop.png" alt="" />,
+    <img className={`${imagesStyle} `} src="/monkey-gram.png" alt="" />,
+  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+
+    // Pulisci l'intervallo quando il componente si smonta
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <>
       <h1 className="w-full py-32 text-2xl font-black text-center lg:text-6xl ">
         {" "}
         Because Weibo is for everyone{" "}
       </h1>
+
       <div className="flex flex-col items-center justify-center gap-y-52">
+        {images[index]}
         {items.map((data, index) => (
           <>
             <div
